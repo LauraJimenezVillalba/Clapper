@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="controllers.LoginController">
    <children>
       <ImageView fx:id="fondo" fitHeight="616.0" fitWidth="829.0" layoutX="8.0" pickOnBounds="true" preserveRatio="true">
          <image>

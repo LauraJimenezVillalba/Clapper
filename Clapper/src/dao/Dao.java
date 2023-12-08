@@ -19,4 +19,16 @@ public class Dao {
     }
   }
   
+  public static void loginUser(Connection conexion,String usuario, String password) {
+	  PreparedStatement sentencia;
+	  try {
+		sentencia = conexion.prepareStatement("SELECT * FROM usuario WHERE nombre = ? AND contraseña = ?");
+		sentencia.setString(1, usuario);
+		sentencia.setString(2, password);
+		sentencia.executeUpdate();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+  }
+  
 }

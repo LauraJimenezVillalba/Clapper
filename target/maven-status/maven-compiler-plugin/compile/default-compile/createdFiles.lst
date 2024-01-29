@@ -1,0 +1,8 @@
+controllers\RegisterController.class
+application\Main.class
+controllers\LoginController.class
+dao\HibernateUtil.class
+application\Utils.class
+dao\UsuarioDAO.class
+conexion\Conexion.class
+models\Usuario.class

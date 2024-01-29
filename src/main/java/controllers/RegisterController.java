@@ -46,6 +46,7 @@ public class RegisterController {
 			alert.setHeaderText(null);
 			alert.setContentText("Tu nuevo usuario ha sido registrado correctamente.");
 			alert.showAndWait();
+			// hacer que no se registre si ya está ese usuario/correo
 		} else {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Error");

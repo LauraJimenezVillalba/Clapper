@@ -12,7 +12,7 @@ public class Main extends Application {
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("/views/Login.fxml"));
-			Pane ventana = (Pane) loader.load(); // esta linea da error
+			Pane ventana = (Pane) loader.load(); // esta linea da error a veces y no se por
 			Scene scene = new Scene(ventana);
 			scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
 			primaryStage.setScene(scene);

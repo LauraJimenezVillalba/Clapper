@@ -46,6 +46,11 @@ public class RegisterController {
 			alert.setHeaderText(null);
 			alert.setContentText("Tu nuevo usuario ha sido registrado correctamente.");
 			alert.showAndWait();
+			try {
+				handleBtnVolver();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			// hacer que no se registre si ya está ese usuario/correo
 		} else {
 			Alert alert = new Alert(AlertType.WARNING);
@@ -62,6 +67,7 @@ public class RegisterController {
 		try {
 			Parent root = loader.load();
 			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
 			Stage stage = (Stage) btnVolver.getScene().getWindow();
 			stage.setScene(scene);
 		} catch (IOException e) {

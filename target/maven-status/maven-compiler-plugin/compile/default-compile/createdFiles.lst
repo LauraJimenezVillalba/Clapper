@@ -1,12 +1,5 @@
-controllers\RegisterController.class
-models\Genero.class
-application\Utils.class
-models\Usuario.class
 models\Director.class
+models\Genero.class
+models\Usuario.class
 models\Actor.class
-application\Main.class
-controllers\LoginController.class
 models\Pelicula.class
-dao\HibernateUtil.class
-dao\UsuarioDAO.class
-conexion\Conexion.class

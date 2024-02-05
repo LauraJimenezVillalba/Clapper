@@ -1,13 +1,10 @@
 package controllers;
 
 import java.io.IOException;
-import java.sql.Connection;
 
-import conexion.Conexion;
 import dao.UsuarioDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -38,8 +35,16 @@ public class LoginController {
 	private void handleBtnIniciarSesion() {
 		boolean success = UsuarioDAO.loginUser(txtUser.getText(), txtPassword.getText());
 		if (success) {
-			// pasar a pantalla principal
-			System.out.print("login correcto");
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PaginaPrincipal.fxml"));
+			try {
+				Parent root = loader.load();
+				Scene scene = new Scene(root);
+				scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
+				Stage stage = (Stage) btnIniciarSesion.getScene().getWindow();
+				stage.setScene(scene);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		} else {
 			Alert alert = new Alert(AlertType.WARNING);
 			alert.setTitle("Error");

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="616.0" prefWidth="829.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="-5.0" prefHeight="123.0" prefWidth="838.0" style="-fx-background-color: BCBCBC;">
+         <children>
+            <Label layoutX="28.0" layoutY="34.0" text="Clapper">
+               <font>
+                  <Font name="Arial" size="38.0" />
+               </font>
+            </Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#16242b" height="49.0" layoutX="585.0" layoutY="37.0" stroke="BLACK" strokeType="INSIDE" width="128.0" />
+            <Circle fill="#ff1f1f" layoutX="575.0" layoutY="61.0" radius="29.0" stroke="#ff1f1f" strokeType="INSIDE" />
+            <ImageView fx:id="imgViewPaginaPrincipal" fitHeight="59.0" fitWidth="51.0" layoutX="394.0" layoutY="35.0" onMouseClicked="#imgViewPaginaPrincipal" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/video.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="619.0" layoutY="45.0" text="Añadir" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="26.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="imgViewBuscaPelicula" fitHeight="59.0" fitWidth="51.0" layoutX="470.0" layoutY="35.0" onMouseClicked="#imgViewBuscaPelicula" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/buscar.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgViewPerfil" fitHeight="59.0" fitWidth="51.0" layoutX="738.0" layoutY="37.0" onMouseClicked="#imgViewPerfil" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/User.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="49.0" fitWidth="51.0" layoutX="550.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/agregar.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <ScrollPane layoutX="1.0" layoutY="123.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="830.0">
+         <content>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="616.0" fitWidth="829.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/fondo%20principal.jpg" />
+                     </image>
+                  </ImageView>
+                  <Pane layoutX="32.0" layoutY="25.0" prefHeight="292.0" prefWidth="200.0" style="-fx-background-color: BCBCBC;">
+                     <children>
+                        <ImageView fx:id="imgViewAgregaImagen" fitHeight="79.0" fitWidth="75.0" layoutX="63.0" layoutY="109.0" onMouseClicked="#imgViewAgregaImagen" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/agregaimagen.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="315.0" layoutY="25.0" prefHeight="592.0" prefWidth="461.0" style="-fx-background-color: BCBCBC;">
+                     <children>
+                        <Label layoutX="206.0" layoutY="20.0" text="Título:">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtfTitulo" layoutX="133.0" layoutY="48.0" onAction="#txtfTitulo" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #16242B;" />
+                        <Label layoutX="63.0" layoutY="100.0" text="Director(es):">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtfDirector" layoutX="20.0" layoutY="129.0" onAction="#txtfDirector" prefHeight="25.0" prefWidth="186.0" style="-fx-background-color: #16242B;" />
+                        <TextField fx:id="txtfActor" layoutX="255.0" layoutY="129.0" onAction="#txtfActor" prefHeight="25.0" prefWidth="186.0" style="-fx-background-color: #16242B;" />
+                        <Label layoutX="309.0" layoutY="100.0" text="Actor(es):">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="57.0" layoutY="166.0" text="Año:">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="cbAno" layoutX="20.0" layoutY="193.0" onAction="#cbAno" prefHeight="25.0" prefWidth="111.0" style="-fx-background-color: #16242B;" />
+                        <ComboBox fx:id="cbGenero" layoutX="178.0" layoutY="193.0" onAction="#cbGenero" prefHeight="25.0" prefWidth="262.0" style="-fx-background-color: #16242B;" />
+                        <Label layoutX="266.0" layoutY="166.0" text="Género(s):">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="188.0" layoutY="236.0" text="Ubicación:">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="cbUbicacion" layoutX="130.0" layoutY="264.0" onAction="#cbUbicacion" prefHeight="25.0" prefWidth="201.0" style="-fx-background-color: #16242B;" />
+                        <Label layoutX="193.0" layoutY="303.0" text="Sinopsis:">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </Label>
+                        <TextArea layoutX="48.0" layoutY="336.0" prefHeight="200.0" prefWidth="369.0" style="-fx-background-color: #16242B;" />
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

@@ -19,7 +19,7 @@
       </ImageView>
       <Pane layoutX="-5.0" prefHeight="123.0" prefWidth="838.0" style="-fx-background-color: BCBCBC;">
          <children>
-            <Label layoutX="28.0" layoutY="34.0" text="Clapper">
+            <Label layoutX="28.0" layoutY="34.0" text="Clapper" textFill="#16242b">
                <font>
                   <Font name="Arial" size="38.0" />
                </font>
@@ -57,11 +57,6 @@
          <content>
             <AnchorPane fx:id="peliculas">
                <children>
-                  <Label layoutX="21.0" layoutY="14.0" text="Destacados" textFill="#fffbfb">
-                     <font>
-                        <Font name="Arial" size="29.0" />
-                     </font>
-                  </Label>
                </children>
             </AnchorPane>
          </content>

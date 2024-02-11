@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,6 +11,11 @@
 
 <AnchorPane prefHeight="616.0" prefWidth="829.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <ImageView fitHeight="617.0" fitWidth="866.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/fondo%20principal.jpg" />
+         </image>
+      </ImageView>
       <Pane layoutX="-5.0" prefHeight="123.0" prefWidth="838.0" style="-fx-background-color: BCBCBC;">
          <children>
             <Label layoutX="28.0" layoutY="34.0" text="Clapper">
@@ -41,73 +45,34 @@
             </ImageView>
          </children>
       </Pane>
-      <ScrollPane layoutX="1.0" layoutY="123.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="830.0">
+      <ScrollPane layoutX="1.0" layoutY="123.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="830.0" style="-fx-background-color: transparent; -fx-background: transparent;">
          <content>
             <AnchorPane>
                <children>
-                  <ImageView fitHeight="616.0" fitWidth="829.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/fondo%20principal.jpg" />
-                     </image>
-                  </ImageView>
-                  <Pane layoutX="315.0" layoutY="141.0" prefHeight="476.0" prefWidth="461.0" style="-fx-background-color: BCBCBC;">
+                  <Pane layoutX="315.0" layoutY="105.0" prefHeight="476.0" prefWidth="461.0" style="-fx-background-color: BCBCBC;">
                      <children>
-                        <Label layoutX="50.0" layoutY="25.0" text="Reparto principal:">
+                        <TextArea fx:id="textoAEscribir" editable="false" layoutX="51.0" layoutY="38.0" prefHeight="200.0" prefWidth="359.0" text="a" wrapText="true">
                            <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="txtfReparto" editable="false" layoutX="162.0" layoutY="23.0" onAction="#txtfReparto" prefHeight="25.0" prefWidth="249.0" style="-fx-opacity: 0;" />
-                        <Label layoutX="67.0" layoutY="58.0" text="Director(es):">
-                           <font>
-                              <Font name="Arial" size="14.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="txtfDirector" editable="false" layoutX="144.0" layoutY="56.0" onAction="#txtfDirector" prefHeight="25.0" prefWidth="205.0" style="-fx-opacity: 0;" />
-                        <Label layoutX="67.0" layoutY="90.0" text="Género:">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="txtfGenero" editable="false" layoutX="117.0" layoutY="87.0" onAction="#txtfGenero" prefHeight="25.0" prefWidth="146.0" style="-fx-opacity: 0;" />
-                        <Label layoutX="182.0" layoutY="121.0" text="Año:">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="txtfAno" editable="false" layoutX="213.0" layoutY="119.0" onAction="#txtfAno" prefHeight="25.0" prefWidth="65.0" style="-fx-opacity: 0;" />
-                        <TextArea fx:id="txtaSinopsis" layoutX="80.0" layoutY="157.0" prefHeight="200.0" prefWidth="306.0" style="-fx-opacity: 0;">
-                           <font>
-                              <Font size="14.0" />
+                              <Font name="System Bold" size="12.0" />
                            </font>
                         </TextArea>
                      </children>
                   </Pane>
-                  <ImageView fx:id="imgViewCartelPelicula" fitHeight="292.0" fitWidth="200.0" layoutX="43.0" layoutY="31.0" onMouseClicked="#imgViewCartelPelicula" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgViewCartelPelicula" fitHeight="292.0" fitWidth="200.0" layoutX="43.0" layoutY="105.0" onMouseClicked="#imgViewCartelPelicula" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../img/blanco.jpg" />
                      </image>
                   </ImageView>
-                  <Pane layoutX="43.0" layoutY="311.0" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: BCBCBC;">
+                  <Pane layoutX="43.0" layoutY="385.0" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: BCBCBC;">
                      <children>
-                        <ImageView fitHeight="35.0" fitWidth="37.0" layoutX="108.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../img/estrella.png" />
-                           </image>
-                        </ImageView>
-                        <TextField fx:id="txtfPuntuacion" editable="false" layoutX="29.0" layoutY="5.0" onAction="#txtfPuntuacion" prefHeight="51.0" prefWidth="71.0" style="-fx-opacity: 0;">
+                        <Label fx:id="labelEstrellas" alignment="CENTER" contentDisplay="CENTER" layoutX="44.0" layoutY="9.0" prefHeight="43.0" prefWidth="113.0" text="0,0">
                            <font>
-                              <Font name="Arial" size="28.0" />
+                              <Font name="Arial" size="38.0" />
                            </font>
-                        </TextField>
+                        </Label>
                      </children>
                   </Pane>
-                  <TextField fx:id="txtfTitulo" editable="false" layoutX="345.0" layoutY="47.0" onAction="#txtfTitulo" prefHeight="40.0" prefWidth="244.0" style="-fx-opacity: 0;">
-                     <font>
-                        <Font name="Arial" size="22.0" />
-                     </font>
-                  </TextField>
-                  <Pane layoutX="605.0" layoutY="37.0" prefHeight="58.0" prefWidth="171.0" style="-fx-background-color: BCBCBC;">
+                  <Pane layoutX="605.0" layoutY="22.0" prefHeight="58.0" prefWidth="171.0" style="-fx-background-color: BCBCBC;">
                      <children>
                         <Label layoutX="6.0" layoutY="8.0" prefHeight="43.0" prefWidth="111.0" text="Añadir o Votar">
                            <font>
@@ -121,6 +86,11 @@
                         </ImageView>
                      </children>
                   </Pane>
+                  <Label fx:id="labelTitulo" layoutX="43.0" layoutY="37.0" prefHeight="43.0" prefWidth="544.0" text="Película">
+                     <font>
+                        <Font name="Arial" size="38.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </content>

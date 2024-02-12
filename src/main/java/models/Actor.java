@@ -8,38 +8,36 @@ import javax.persistence.Id;
 @Entity
 public class Actor {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int idActor;
-  private String nombre;
-  private String apellido;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int idActor;
+	private String nombre;
+	private String apellido;
 
-  public Actor(int idActor, String nombre, String apellido) {
-    this.idActor = idActor;
-    this.nombre = nombre;
-    this.apellido = apellido;
-  }
+	public Actor(int idActor, String nombre, String apellido) {
+		this.idActor = idActor;
+		this.nombre = nombre;
+		this.apellido = apellido;
+	}
 
-  public int getIdActor() {
-    return idActor;
-  }
+	public int getIdActor() {
+		return idActor;
+	}
 
-  public String getNombre() {
-    return nombre;
-  }
+	public String getNombre() {
+		return nombre;
+	}
 
-  public void setNombre(String nombre) {
-    this.nombre = nombre;
-  }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-  public String getApellido() {
-    return apellido;
-  }
+	public String getApellido() {
+		return apellido;
+	}
 
-  public void setApellido(String apellido) {
-    this.apellido = apellido;
-  }
-
-
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
 
 }

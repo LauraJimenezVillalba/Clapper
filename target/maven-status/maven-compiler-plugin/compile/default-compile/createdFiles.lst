@@ -1,4 +1,5 @@
 controllers\RegisterController.class
+controllers\PaginaDescubrirController.class
 controllers\PaginaPrincipalController.class
 models\Director.class
 controllers\PaginaInfoPeliculaController.class

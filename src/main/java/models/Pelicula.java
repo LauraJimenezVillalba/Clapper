@@ -7,89 +7,81 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
 @Entity
 public class Pelicula {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int idPelicula;
-  private String nombre;
-  private String contraseña;
-  private String email;
-  private Year year;
-  private int minutos;
-  private double estrellas;
-  private String sinopsis;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idPelicula;
+    private String nombre;
+	private Year year;
+	private int minutos;
+	private double estrellas;
+	private String sinopsis;
+	private String poster;
+	
+	public Pelicula(int idPelicula, String nombre, Year year, int minutos, double estrellas, String sinopsis, String poster) {
+		this.idPelicula = idPelicula;
+		this.nombre = nombre;
+		this.year = year;
+		this.minutos = minutos;
+		this.estrellas = estrellas;
+		this.sinopsis = sinopsis;
+		this.poster = poster;
+	}
 
-  public Pelicula(int idPelicula, String nombre, Year year, int minutos, double estrellas,
-      String sinopsis) {
-    this.idPelicula = idPelicula;
-    this.nombre = nombre;
-    this.year = year;
-    this.minutos = minutos;
-    this.estrellas = estrellas;
-    this.sinopsis = sinopsis;
-  }
+	public int getIdPelicula() {
+		return idPelicula;
+	}
 
-  public int getIdPelicula() {
-    return idPelicula;
-  }
+	public String getNombre() {
+		return nombre;
+	}
 
-  public String getNombre() {
-    return nombre;
-  }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-  public void setNombre(String nombre) {
-    this.nombre = nombre;
-  }
+	public Year getYear() {
+		return year;
+	}
 
-  public String getContraseña() {
-    return contraseña;
-  }
+	public void setYear(Year year) {
+		this.year = year;
+	}
 
-  public void setContraseña(String contraseña) {
-    this.contraseña = contraseña;
-  }
+	public int getMinutos() {
+		return minutos;
+	}
 
-  public String getEmail() {
-    return email;
-  }
+	public void setMinutos(int minutos) {
+		this.minutos = minutos;
+	}
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+	public double getEstrellas() {
+		return estrellas;
+	}
 
-  public Year getYear() {
-    return year;
-  }
+	public void setEstrellas(double estrellas) {
+		this.estrellas = estrellas;
+	}
 
-  public void setYear(Year year) {
-    this.year = year;
-  }
+	public String getSinopsis() {
+		return sinopsis;
+	}
 
-  public int getMinutos() {
-    return minutos;
-  }
-
-  public void setMinutos(int minutos) {
-    this.minutos = minutos;
-  }
-
-  public double getEstrellas() {
-    return estrellas;
-  }
-
-  public void setEstrellas(double estrellas) {
-    this.estrellas = estrellas;
-  }
-
-  public String getSinopsis() {
-    return sinopsis;
-  }
-
-  public void setSinopsis(String sinopsis) {
-    this.sinopsis = sinopsis;
-  }
-
+	public void setSinopsis(String sinopsis) {
+		this.sinopsis = sinopsis;
+	}
+	
+	public String getPoster() {
+		return poster;
+	}
+	
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
+	
 }
 

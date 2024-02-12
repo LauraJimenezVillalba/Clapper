@@ -13,7 +13,7 @@ public class Utils {
     
     OkHttpClient client = new OkHttpClient();
     Request request = new Request.Builder()
-        .url("https://api.themoviedb.org/3/movie/866398?language=es-ES").get()
+        .url("https://api.themoviedb.org/3/movie/" + id + "?language=es-ES").get()
         .addHeader("accept", "application/json")
         .addHeader("Authorization",
             "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4ZWI4ZmQ2YjUwOGE5YmE3ZGY2OTdkNmQ5MWFhMGFjZiIsInN1YiI6IjY1NzgwYmY2MzVhNjFlMDEzYWMyMDZmMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ujcPy-vulTWhsv3dvQlEBboqr5tTmOBDL4zZwliwFlI")

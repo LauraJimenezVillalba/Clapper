@@ -12,8 +12,13 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="616.0" prefWidth="829.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="616.0" prefWidth="829.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PaginaDescubrirController">
    <children>
+      <ImageView fitHeight="617.0" fitWidth="857.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/fondo%20principal.jpg" />
+         </image>
+      </ImageView>
       <Pane layoutX="-5.0" prefHeight="123.0" prefWidth="841.0" style="-fx-background-color: BCBCBC;">
          <children>
             <Label layoutX="28.0" layoutY="34.0" text="Clapper">
@@ -33,7 +38,7 @@
                   <Font name="Arial" size="22.0" />
                </font>
             </Label>
-            <ImageView fitHeight="43.0" fitWidth="51.0" layoutX="472.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="buscar" fitHeight="43.0" fitWidth="51.0" layoutX="472.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/buscar.png" />
                </image>
@@ -63,7 +68,7 @@
                </font>
             </Label>
             <TextField fx:id="txtfBuscar" layoutX="14.0" layoutY="65.0" onAction="#txtfBuscar" prefHeight="25.0" prefWidth="175.0" style="-fx-background-color: #16242b;" />
-            <ImageView fitHeight="37.0" fitWidth="43.0" layoutX="202.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="buscar" fitHeight="37.0" fitWidth="43.0" layoutX="202.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/busqueda.png" />
                </image>
@@ -95,48 +100,12 @@
             <ComboBox fx:id="cbEstado" layoutX="14.0" layoutY="295.0" onAction="#cbEstado" prefHeight="25.0" prefWidth="225.0" style="-fx-background-color: #16242b;" />
          </children>
       </Pane>
-      <ScrollPane layoutX="265.0" layoutY="123.0" prefHeight="494.0" prefWidth="570.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="493.0" prefWidth="568.0">
+      <ScrollPane hbarPolicy="NEVER" layoutX="265.0" layoutY="123.0" prefHeight="494.0" prefWidth="570.0" style="-fx-background-color: transparent; -fx-background: transparent;">
+         <content>
+          <AnchorPane fx:id="peliculas">
                <children>
-                  <ImageView fitHeight="617.0" fitWidth="791.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/fondo%20principal.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="248.0" fitWidth="165.0" layoutX="14.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/blanco.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="248.0" fitWidth="165.0" layoutX="194.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/blanco.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="248.0" fitWidth="165.0" layoutX="374.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/blanco.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="248.0" fitWidth="165.0" layoutX="14.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/blanco.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="248.0" fitWidth="165.0" layoutX="194.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/blanco.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="248.0" fitWidth="165.0" layoutX="374.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../img/blanco.jpg" />
-                     </image>
-                  </ImageView>
                </children>
             </AnchorPane>
-        </content>
-      </ScrollPane>
+         </content></ScrollPane>
    </children>
 </AnchorPane>

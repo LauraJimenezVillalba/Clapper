@@ -64,6 +64,22 @@ public class PaginaPrincipalController {
     int total = imprimirPeliculas("popular", 0);
     total = imprimirPeliculas("upcoming", total);
     total = imprimirPeliculas("now_playing", total);
+    
+    // NavBar
+    
+    imgViewBuscaPelicula.setOnMouseClicked(event -> {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PaginaDescubrir.fxml"));
+        try {
+          Parent root = loader.load();
+          Scene scene = new Scene(root);
+          scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
+          Stage stage = (Stage) imgViewBuscaPelicula.getScene().getWindow();
+          stage.setScene(scene);
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      });
+    // Fin de NavBar
 
   }
 
@@ -181,7 +197,7 @@ public class PaginaPrincipalController {
       
       stackPane.setOnMouseClicked(event -> {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PaginaInfoPelicula.fxml"));
-        PaginaInfoPeliculaController controller = new PaginaInfoPeliculaController(movieObject.getInt("id"), etiquetaGeneroEnviar, etiquetaTitulo, imageUrl, labelEstrellas.getText());
+        PaginaInfoPeliculaController controller = new PaginaInfoPeliculaController(movieObject.getInt("id"), etiquetaGeneroEnviar, etiquetaTitulo, imageUrl, labelEstrellas.getText(), movieObject.getString("overview"));
         loader.setController(controller);
         try {
           Parent root = loader.load();

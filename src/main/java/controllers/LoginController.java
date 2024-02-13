@@ -36,7 +36,7 @@ public class LoginController {
 		boolean success = UsuarioDAO.loginUser(txtUser.getText(), txtPassword.getText());
 		if (success) {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PaginaPrincipal.fxml"));
-			PaginaPrincipalController controller = new PaginaPrincipalController(UsuarioDAO.userGenre(txtUser.getText()));
+			PaginaPrincipalController controller = new PaginaPrincipalController(UsuarioDAO.userGenre(txtUser.getText()), UsuarioDAO.userCorreo(txtUser.getText()));
 			loader.setController(controller);
 			try {
 				Parent root = loader.load();

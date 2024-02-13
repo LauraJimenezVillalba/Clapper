@@ -45,9 +45,11 @@ public class PaginaPrincipalController {
 	private AnchorPane peliculas;
 	
 	private int userGenre;
+	private String correo;
 
-	public PaginaPrincipalController(int userGenre) {
+	public PaginaPrincipalController(int userGenre, String correo) {
 		this.userGenre = userGenre;
+		this.correo = correo;
 	}
 	
 	@FXML
@@ -76,7 +78,7 @@ public class PaginaPrincipalController {
 
 		imgViewBuscaPelicula.setOnMouseClicked(event -> {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PaginaDescubrir.fxml"));
-			PaginaDescubrirController controller = new PaginaDescubrirController(userGenre);
+			PaginaDescubrirController controller = new PaginaDescubrirController(userGenre, correo);
 			loader.setController(controller);
 			try {
 				Parent root = loader.load();
@@ -88,6 +90,22 @@ public class PaginaPrincipalController {
 				e.printStackTrace();
 			}
 		});
+		
+		imgViewPerfil.setOnMouseClicked(event -> {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PaginaPerfil.fxml"));
+			PaginaPerfilController controller = new PaginaPerfilController(userGenre, correo);
+			loader.setController(controller);
+			try {
+				Parent root = loader.load();
+				Scene scene = new Scene(root);
+				scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
+				Stage stage = (Stage) imgViewPerfil.getScene().getWindow();
+				stage.setScene(scene);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		
 		// Fin de NavBar
 
 	}
@@ -221,7 +239,7 @@ public class PaginaPrincipalController {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PaginaInfoPelicula.fxml"));
 				PaginaInfoPeliculaController controller = new PaginaInfoPeliculaController(movieObject.getInt("id"),
 						etiquetaGeneroEnviar, etiquetaTitulo, imageUrl, labelEstrellas.getText(),
-						movieObject.getString("overview"), userGenre);
+						movieObject.getString("overview"), userGenre, correo);
 				loader.setController(controller);
 				try {
 					Parent root = loader.load();

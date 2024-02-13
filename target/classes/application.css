@@ -2,6 +2,24 @@
     -fx-text-alignment: center ;
 }
 
+.combo-box .list-cell {
+  -fx-text-fill: white;
+}
+
+.combo-box .list-view .list-cell {
+  -fx-text-fill: #16242b;
+}
+
+.combo-box .list-view .list-cell:hover {
+  -fx-text-fill: white;
+  -fx-background-color :#16242b;
+}
+
+.combo-box .list-view .list-cell:focused {
+  -fx-text-fill: white;
+  -fx-background-color :#16242b;
+}
+
 .text-area {
     -fx-background-color: transparent;
 }

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -51,7 +53,7 @@
             </ImageView>
          </children>
       </Pane>
-      <ScrollPane layoutX="1.0" layoutY="123.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="830.0">
+      <ScrollPane hbarPolicy="NEVER" layoutX="1.0" layoutY="123.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="830.0">
          <content>
             <AnchorPane>
                <children>
@@ -101,18 +103,34 @@
                               <Font name="Arial" size="18.0" />
                            </font>
                         </Label>
-                        <Label layoutX="188.0" layoutY="236.0" text="Ubicación:">
+                        <Label layoutX="266.0" layoutY="235.0" text="Ubicación:">
                            <font>
                               <Font name="Arial" size="18.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="cbUbicacion" layoutX="130.0" layoutY="264.0" onAction="#cbUbicacion" prefHeight="25.0" prefWidth="201.0" style="-fx-background-color: #16242B;" />
-                        <Label layoutX="193.0" layoutY="303.0" text="Sinopsis:">
+                        <ComboBox fx:id="cbUbicacion" layoutX="211.0" layoutY="264.0" onAction="#cbUbicacion" prefHeight="25.0" prefWidth="201.0" style="-fx-background-color: #16242B;" />
+                        <Label layoutX="193.0" layoutY="347.0" text="Sinopsis:">
                            <font>
                               <Font name="Arial" size="18.0" />
                            </font>
                         </Label>
-                        <TextArea layoutX="48.0" layoutY="336.0" prefHeight="200.0" prefWidth="369.0" style="-fx-background-color: #16242B;" />
+                        <TextArea layoutX="48.0" layoutY="378.0" prefHeight="200.0" prefWidth="369.0" style="-fx-background-color: #16242B;" />
+                        <Label layoutX="40.0" layoutY="235.0" text="Visto:">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </Label>
+                        <CheckBox fx:id="chkbVisto" layoutX="92.0" layoutY="234.0" mnemonicParsing="false" onAction="#chkbVisto">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </CheckBox>
+                        <Slider fx:id="sldValoracion" blockIncrement="1.0" layoutX="19.0" layoutY="309.0" majorTickUnit="1.0" max="10.0" prefHeight="37.0" prefWidth="133.0" showTickLabels="true" showTickMarks="true" />
+                        <Label layoutX="30.0" layoutY="277.0" text="Valoracion:">
+                           <font>
+                              <Font name="Arial" size="18.0" />
+                           </font>
+                        </Label>
                      </children>
                   </Pane>
                </children>

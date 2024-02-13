@@ -42,55 +42,72 @@ import javafx.stage.Stage;
 public class PaginaDescubrirController {
 
 	int userGenre;
+	String correo;
 	
 	@FXML
-	private ComboBox<?> cbAnoDesde;
+    private ImageView buscar;
 
-	@FXML
-	private ComboBox<?> cbAnoHasta;
+    @FXML
+    private ComboBox<String> cbEstado;
 
-	@FXML
-	private ComboBox<?> cbEstado;
+    @FXML
+    private ComboBox<String> cbGeneros;
 
-	@FXML
-	private ComboBox<String> cbGeneros;
+    @FXML
+    private ComboBox<String> cbUbicacion;
 
-	@FXML
-	private ComboBox<?> cbUbicacion;
+    @FXML
+    private ComboBox<String> cbYear;
 
-	@FXML
-	private ImageView imgViewAnadePelicula;
+    @FXML
+    private ImageView imgViewAnadePelicula;
 
-	@FXML
-	private ImageView imgViewPaginaPrincipal;
+    @FXML
+    private ImageView imgViewPaginaPrincipal;
 
-	@FXML
-	private ImageView imgViewPerfil;
+    @FXML
+    private ImageView imgViewPerfil;
 
-	@FXML
-	private ImageView buscar;
+    @FXML
+    private AnchorPane peliculas;
 
-	@FXML
-	private TextField txtfBuscar;
+    @FXML
+    private TextField txtfBuscarActor;
 
-	@FXML
-	private AnchorPane peliculas;
+    @FXML
+    private TextField txtfBuscarTitulo;
 	
-	public PaginaDescubrirController(int userGenre) {
+	public PaginaDescubrirController(int userGenre, String correo) {
 		this.userGenre = userGenre;
+		this.correo = correo;
 	}
 
 	public void initialize() throws IOException {
 		// NavBar
 		imgViewPaginaPrincipal.setOnMouseClicked(event -> {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PaginaPrincipal.fxml"));
-			PaginaPrincipalController controller = new PaginaPrincipalController(userGenre);
+			PaginaPrincipalController controller = new PaginaPrincipalController(userGenre, correo);
 			loader.setController(controller);
 			try {
 				Parent root = loader.load();
 				Scene scene = new Scene(root);
 				scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
 				Stage stage = (Stage) imgViewPaginaPrincipal.getScene().getWindow();
+				stage.setScene(scene);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		
+		imgViewPerfil.setOnMouseClicked(event -> {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PaginaPerfil.fxml"));
+			PaginaPerfilController controller = new PaginaPerfilController(userGenre, correo);
+			loader.setController(controller);
+			try {
+				Parent root = loader.load();
+				Scene scene = new Scene(root);
+				scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
+				Stage stage = (Stage) imgViewPerfil.getScene().getWindow();
 				stage.setScene(scene);
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -118,14 +135,21 @@ public class PaginaDescubrirController {
             items.add(valor);
         }
         cbGeneros.setItems(items);
+        
+        ObservableList<String> years = FXCollections.observableArrayList();
+        int currentYear = java.time.LocalDate.now().getYear();
+        for (int year = currentYear; year >= 1900; year--) {
+            years.add(String.valueOf(year));
+        }
+        cbYear.setItems(years);
 
 		// Fin de NavBar
 
 		buscar.setOnMouseClicked(event -> {
 
-			String url = "https://api.themoviedb.org/3/search/movie?query=" + txtfBuscar.getText()
+			String url = "https://api.themoviedb.org/3/search/movie?query=" + txtfBuscarTitulo.getText()
 			+ "&include_adult=false&language=es-ES&page=1";
-			if (txtfBuscar.getText().isEmpty()) {
+			if (txtfBuscarTitulo.getText().isEmpty()) {
 				url = "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=es-ES&page=1&sort_by=popularity.desc";
 			}
 			String selectedGenre = cbGeneros.getSelectionModel().getSelectedItem();
@@ -136,7 +160,10 @@ public class PaginaDescubrirController {
 					e.printStackTrace();
 				}
 		    }
-			System.out.println(url);
+			String selectedYear = cbYear.getSelectionModel().getSelectedItem();
+			if (selectedYear != null && !selectedYear.isEmpty()) {
+			    url += "&primary_release_year=" + Integer.parseInt(selectedYear);
+			}
 			
 			Request request = new Request.Builder()
 					.url(url)
@@ -251,7 +278,7 @@ public class PaginaDescubrirController {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PaginaInfoPelicula.fxml"));
 				PaginaInfoPeliculaController controller = new PaginaInfoPeliculaController(movieObject.getInt("id"),
 						etiquetaGeneroEnviar, etiquetaTitulo, urlEnviarFinal, labelEstrellas.getText(),
-						movieObject.getString("overview"), userGenre);
+						movieObject.getString("overview"), userGenre, correo);
 				loader.setController(controller);
 				try {
 					Parent root = loader.load();
@@ -286,50 +313,50 @@ public class PaginaDescubrirController {
 			peliculas.getChildren().add(stackPane);
 		}
 	}
-
+	
 	@FXML
-	void cbAnoDesde(ActionEvent event) {
+    void cbAnoDesde(ActionEvent event) {
 
-	}
+    }
 
-	@FXML
-	void cbAnoHasta(ActionEvent event) {
+    @FXML
+    void cbEstado(ActionEvent event) {
 
-	}
+    }
 
-	@FXML
-	void cbEstado(ActionEvent event) {
+    @FXML
+    void cbGeneros(ActionEvent event) {
 
-	}
+    }
 
-	@FXML
-	void cbGeneros(ActionEvent event) {
+    @FXML
+    void cbUbicacion(ActionEvent event) {
 
-	}
+    }
 
-	@FXML
-	void cbUbicacion(ActionEvent event) {
+    @FXML
+    void imgViewAnadePelicula(MouseEvent event) {
 
-	}
+    }
 
-	@FXML
-	void imgViewAnadePelicula(MouseEvent event) {
+    @FXML
+    void imgViewPaginaPrincipal(MouseEvent event) {
 
-	}
+    }
 
-	@FXML
-	void imgViewPaginaPrincipal(MouseEvent event) {
+    @FXML
+    void imgViewPerfil(MouseEvent event) {
 
-	}
+    }
 
-	@FXML
-	void imgViewPerfil(MouseEvent event) {
+    @FXML
+    void txtfBuscarActor(ActionEvent event) {
 
-	}
+    }
 
-	@FXML
-	void txtfBuscar(ActionEvent event) {
+    @FXML
+    void txtfBuscarTitulo(ActionEvent event) {
 
-	}
+    }
 
 }

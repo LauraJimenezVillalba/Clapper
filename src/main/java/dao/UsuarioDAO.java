@@ -79,4 +79,50 @@ public class UsuarioDAO {
 		return id;
 	}
 	
+	public static String userCorreo(String usuario) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+		String correo = "";
+
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("FROM Usuario WHERE nombre = :usuario");
+			query.setParameter("usuario", usuario);
+			Usuario user = (Usuario) query.uniqueResult();
+			correo = user.getEmail();
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return correo;
+	}
+	
+	public static String correoToUser(String email) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+		String username = "";
+
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("FROM Usuario WHERE email = :email");
+			query.setParameter("email", email);
+			Usuario user = (Usuario) query.uniqueResult();
+			username = user.getNombre();
+			transaction.commit();
+		} catch (Exception e) {
+			if (transaction != null) {
+				transaction.rollback();
+			}
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return username;
+	}
+	
 }

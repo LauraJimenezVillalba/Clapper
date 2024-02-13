@@ -33,9 +33,10 @@ public class PaginaInfoPeliculaController {
 	String estrellas;
 	String sinopsis;
 	int userGenre;
+	String correo;
 
 	public PaginaInfoPeliculaController(int id, String generos, String tituloCompuesto, String imageUrl,
-			String estrellas, String sinopsis, int userGenre) {
+			String estrellas, String sinopsis, int userGenre, String correo) {
 		this.id = id;
 		this.generos = generos;
 		this.tituloCompuesto = tituloCompuesto;
@@ -43,6 +44,7 @@ public class PaginaInfoPeliculaController {
 		this.estrellas = estrellas;
 		this.sinopsis = sinopsis;
 		this.userGenre = userGenre;
+		this.correo = correo;
 	}
 
 	@FXML
@@ -99,7 +101,11 @@ public class PaginaInfoPeliculaController {
 			String nombreActor = actor.getString("name");
 			actoresString.append(nombreActor).append(", ");
 		}
-		textoPrincipal += actoresString.substring(0, actoresString.length() - 2);
+		if (actoresString.length() >= 2) {
+			textoPrincipal += actoresString.substring(0, actoresString.length() - 2);
+		} else {
+		    textoPrincipal += actoresString;
+		}
 
 		JSONArray arrayDirectores = jsonResponse.getJSONArray("crew");
 		StringBuilder directoresString = new StringBuilder("");
@@ -110,7 +116,11 @@ public class PaginaInfoPeliculaController {
 				directoresString.append(nombreDirector).append(", ");
 			}
 		}
-		textoPrincipal += "\nDirector(es): " + directoresString.substring(0, directoresString.length() - 2);
+		if (directoresString.length() >= 2) {
+		    textoPrincipal += "\nDirector(es): " + directoresString.substring(0, directoresString.length() - 2);
+		} else {
+		    textoPrincipal += "\nDirector(es): " + directoresString;
+		}
 
 		textoPrincipal += "\nGénero: " + generos;
 		String regex = "\\s*(.*?)\\s*\\((\\d{4})\\)\\s*";
@@ -131,7 +141,7 @@ public class PaginaInfoPeliculaController {
 		// NavBar
 		imgViewPaginaPrincipal.setOnMouseClicked(event -> {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PaginaPrincipal.fxml"));
-			PaginaPrincipalController controller = new PaginaPrincipalController(userGenre);
+			PaginaPrincipalController controller = new PaginaPrincipalController(userGenre, correo);
 			loader.setController(controller);
 			try {
 				Parent root = loader.load();
@@ -143,10 +153,25 @@ public class PaginaInfoPeliculaController {
 				e.printStackTrace();
 			}
 		});
+		
+		imgViewPerfil.setOnMouseClicked(event -> {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PaginaPerfil.fxml"));
+			PaginaPerfilController controller = new PaginaPerfilController(userGenre, correo);
+			loader.setController(controller);
+			try {
+				Parent root = loader.load();
+				Scene scene = new Scene(root);
+				scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
+				Stage stage = (Stage) imgViewPerfil.getScene().getWindow();
+				stage.setScene(scene);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
 
 		imgViewBuscaPelicula.setOnMouseClicked(event -> {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PaginaDescubrir.fxml"));
-			PaginaDescubrirController controller = new PaginaDescubrirController(userGenre);
+			PaginaDescubrirController controller = new PaginaDescubrirController(userGenre, correo);
 			loader.setController(controller);
 			try {
 				Parent root = loader.load();

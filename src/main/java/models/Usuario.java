@@ -1,5 +1,7 @@
 package models;
 
+import java.util.ArrayList;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +17,7 @@ public class Usuario {
 	private String nombre;
 	private String contraseña;
 	private String email;
+	private ArrayList<String> ubicaciones;
 
 	public Usuario() {
 	}
@@ -60,6 +63,14 @@ public class Usuario {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public ArrayList<String> getUbicaciones() {
+		return ubicaciones;
+	}
+
+	public void addUbicaciones(String ubicacion) {
+		this.ubicaciones.add(ubicacion);
 	}
 
 }

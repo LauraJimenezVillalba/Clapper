@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -73,12 +74,12 @@
                   </Pane>
                   <Pane layoutX="315.0" layoutY="25.0" prefHeight="592.0" prefWidth="461.0" style="-fx-background-color: BCBCBC;">
                      <children>
-                        <Label layoutX="206.0" layoutY="20.0" text="Título:">
+                        <Label layoutX="78.0" layoutY="20.0" text="Título:">
                            <font>
                               <Font name="Arial" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="txtfTitulo" layoutX="133.0" layoutY="48.0" onAction="#txtfTitulo" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #16242B;" />
+                        <TextField fx:id="txtfTitulo" layoutX="19.0" layoutY="52.0" onAction="#txtfTitulo" prefHeight="25.0" prefWidth="343.0" style="-fx-background-color: #16242B;" />
                         <Label layoutX="63.0" layoutY="100.0" text="Director(es):">
                            <font>
                               <Font name="Arial" size="18.0" />
@@ -108,7 +109,7 @@
                               <Font name="Arial" size="18.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="cbUbicacion" layoutX="211.0" layoutY="264.0" onAction="#cbUbicacion" prefHeight="25.0" prefWidth="201.0" style="-fx-background-color: #16242B;" />
+                        <ComboBox fx:id="cbUbicacion" editable="true" layoutX="211.0" layoutY="264.0" onAction="#cbUbicacion" prefHeight="25.0" prefWidth="201.0" style="-fx-background-color: #16242B;" />
                         <Label layoutX="193.0" layoutY="347.0" text="Sinopsis:">
                            <font>
                               <Font name="Arial" size="18.0" />
@@ -131,6 +132,7 @@
                               <Font name="Arial" size="18.0" />
                            </font>
                         </Label>
+                        <Button fx:id="btnGuardar" layoutX="381.0" layoutY="52.0" mnemonicParsing="false" onAction="#clickGuardar" text="Guardar" />
                      </children>
                   </Pane>
                </children>

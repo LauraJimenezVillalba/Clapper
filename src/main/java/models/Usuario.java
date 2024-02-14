@@ -1,7 +1,5 @@
 package models;
 
-import java.util.ArrayList;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,67 +8,57 @@ import javax.persistence.Id;
 @Entity
 public class Usuario {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	private int genero;
-	private String nombre;
-	private String contraseña;
-	private String email;
-	private ArrayList<String> ubicaciones;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
+  private int genero;
+  private String nombre;
+  private String contraseña;
+  private String email;
 
-	public Usuario() {
-	}
+  public Usuario() {}
 
-	public Usuario(String nombre, String contraseña, String email, int genero) {
-		this.nombre = nombre;
-		this.contraseña = contraseña;
-		this.email = email;
-		this.genero = genero;
-	}
+  public Usuario(String nombre, String contraseña, String email, int genero) {
+    this.nombre = nombre;
+    this.contraseña = contraseña;
+    this.email = email;
+    this.genero = genero;
+  }
 
-	public int getId() {
-		return id;
-	}
-	
-	public int getGenero() {
-		return genero;
-	}
-	
-	public void setGenero(int genero) {
-		this.genero = genero;
-	}
+  public int getId() {
+    return id;
+  }
 
-	public String getNombre() {
-		return nombre;
-	}
+  public int getGenero() {
+    return genero;
+  }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+  public void setGenero(int genero) {
+    this.genero = genero;
+  }
 
-	public String getContraseña() {
-		return contraseña;
-	}
+  public String getNombre() {
+    return nombre;
+  }
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
-	}
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
+  }
 
-	public String getEmail() {
-		return email;
-	}
+  public String getContraseña() {
+    return contraseña;
+  }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+  public void setContraseña(String contraseña) {
+    this.contraseña = contraseña;
+  }
 
-	public ArrayList<String> getUbicaciones() {
-		return ubicaciones;
-	}
+  public String getEmail() {
+    return email;
+  }
 
-	public void addUbicaciones(String ubicacion) {
-		this.ubicaciones.add(ubicacion);
-	}
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
 }

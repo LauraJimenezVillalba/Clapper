@@ -15,7 +15,8 @@
 		<property name="hibernate.show_sql">true</property>    
         
         <mapping class="models.Usuario"/>
-        
+        <mapping class="models.Ubicacion"/>
+        <mapping class="models.Pelicula"/>
         
     </session-factory>
 </hibernate-configuration>

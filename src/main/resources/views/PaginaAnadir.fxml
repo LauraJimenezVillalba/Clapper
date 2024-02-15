@@ -79,14 +79,14 @@
                               <Font name="Arial" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="txtfTitulo" layoutX="19.0" layoutY="52.0" onAction="#txtfTitulo" prefHeight="25.0" prefWidth="343.0" style="-fx-background-color: #16242B;" />
+                        <TextField fx:id="txtfTitulo" layoutX="19.0" layoutY="52.0" onAction="#txtfTitulo" prefHeight="25.0" prefWidth="343.0" style="-fx-background-color: #16242B; -fx-text-fill: white;" />
                         <Label layoutX="63.0" layoutY="100.0" text="Director(es):">
                            <font>
                               <Font name="Arial" size="18.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="txtfDirector" layoutX="20.0" layoutY="129.0" onAction="#txtfDirector" prefHeight="25.0" prefWidth="186.0" style="-fx-background-color: #16242B;" />
-                        <TextField fx:id="txtfActor" layoutX="255.0" layoutY="129.0" onAction="#txtfActor" prefHeight="25.0" prefWidth="186.0" style="-fx-background-color: #16242B;" />
+                        <TextField fx:id="txtfDirector" layoutX="20.0" layoutY="129.0" onAction="#txtfDirector" prefHeight="25.0" prefWidth="186.0" style="-fx-background-color: #16242B; -fx-text-fill: white;" />
+                        <TextField fx:id="txtfActor" layoutX="255.0" layoutY="129.0" onAction="#txtfActor" prefHeight="25.0" prefWidth="186.0" style="-fx-background-color: #16242B; -fx-text-fill: white;" />
                         <Label layoutX="309.0" layoutY="100.0" text="Actor(es):">
                            <font>
                               <Font name="Arial" size="18.0" />
@@ -97,8 +97,8 @@
                               <Font name="Arial" size="18.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="cbAno" layoutX="20.0" layoutY="193.0" onAction="#cbAno" prefHeight="25.0" prefWidth="111.0" style="-fx-background-color: #16242B;" />
-                        <ComboBox fx:id="cbGenero" layoutX="178.0" layoutY="193.0" onAction="#cbGenero" prefHeight="25.0" prefWidth="262.0" style="-fx-background-color: #16242B;" />
+                        <ComboBox fx:id="cbAno" layoutX="20.0" layoutY="193.0" onAction="#cbAno" prefHeight="25.0" prefWidth="111.0" style="-fx-background-color: #16242B; -fx-text-fill: white;" />
+                        <ComboBox fx:id="cbGenero" layoutX="178.0" layoutY="193.0" onAction="#cbGenero" prefHeight="25.0" prefWidth="262.0" style="-fx-background-color: #16242B; -fx-text-fill: white;" />
                         <Label layoutX="266.0" layoutY="166.0" text="Género(s):">
                            <font>
                               <Font name="Arial" size="18.0" />
@@ -115,7 +115,7 @@
                               <Font name="Arial" size="18.0" />
                            </font>
                         </Label>
-                        <TextArea layoutX="48.0" layoutY="378.0" prefHeight="200.0" prefWidth="369.0" style="-fx-background-color: #16242B;" />
+                        <TextArea fx:id="sinopsis" layoutX="48.0" layoutY="378.0" prefHeight="200.0" prefWidth="369.0" style="-fx-background-color: #16242B;" />
                         <Label layoutX="40.0" layoutY="235.0" text="Visto:">
                            <font>
                               <Font name="Arial" size="18.0" />

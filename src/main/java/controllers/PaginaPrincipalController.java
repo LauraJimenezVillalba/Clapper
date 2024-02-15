@@ -90,7 +90,7 @@ public class PaginaPrincipalController {
         e.printStackTrace();
       }
     });
-    
+
     imgViewAnadePelicula.setOnMouseClicked(event -> {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PaginaAnadir.fxml"));
       PaginaAnadirController controller = new PaginaAnadirController(userGenre, correo);
@@ -256,7 +256,7 @@ public class PaginaPrincipalController {
       stackPane.setOnMouseClicked(event -> {
         FXMLLoader loader =
             new FXMLLoader(getClass().getResource("/views/PaginaInfoPelicula.fxml"));
-        PaginaInfoPeliculaController controller = new PaginaInfoPeliculaController(
+        PaginaInfoPeliculaController controller = new PaginaInfoPeliculaController(false,
             movieObject.getInt("id"), etiquetaGeneroEnviar, etiquetaTitulo, imageUrl,
             labelEstrellas.getText(), movieObject.getString("overview"), userGenre, correo);
         loader.setController(controller);

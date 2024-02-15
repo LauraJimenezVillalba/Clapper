@@ -101,7 +101,7 @@ public class PaginaPerfilController {
         e.printStackTrace();
       }
     });
-    
+
     imgViewAnadePelicula.setOnMouseClicked(event -> {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PaginaAnadir.fxml"));
       PaginaAnadirController controller = new PaginaAnadirController(userGenre, correo);

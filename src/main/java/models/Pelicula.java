@@ -23,13 +23,14 @@ public class Pelicula {
   private boolean visto;
   private String genero;
   private String ubicacion;
-  //actores, directores
-  
+  private String actores;
+  private String directores;
+
   public Pelicula() {}
-  
-  public Pelicula(int idPelicula, String nombre, Year year, int minutos, double estrellas,
-      String sinopsis, String poster, boolean visto, String genero, String ubicacion) {
-    this.idPelicula = idPelicula;
+
+  public Pelicula(String nombre, Year year, int minutos, double estrellas, String sinopsis,
+      String poster, boolean visto, String genero, String ubicacion, String actores,
+      String directores) {
     this.nombre = nombre;
     this.year = year;
     this.minutos = minutos;
@@ -39,14 +40,12 @@ public class Pelicula {
     this.visto = visto;
     this.genero = genero;
     this.ubicacion = ubicacion;
+    this.actores = actores;
+    this.directores = directores;
   }
 
   public int getIdPelicula() {
     return idPelicula;
-  }
-
-  public void setIdPelicula(int idPelicula) {
-    this.idPelicula = idPelicula;
   }
 
   public String getNombre() {
@@ -120,6 +119,24 @@ public class Pelicula {
   public void setUbicacion(String ubicacion) {
     this.ubicacion = ubicacion;
   }
+
+  public String getActores() {
+    return actores;
+  }
+
+  public void setActores(String actores) {
+    this.actores = actores;
+  }
+
+  public String getDirectores() {
+    return directores;
+  }
+
+  public void setDirectores(String directores) {
+    this.directores = directores;
+  }
+
+
 
 }
 

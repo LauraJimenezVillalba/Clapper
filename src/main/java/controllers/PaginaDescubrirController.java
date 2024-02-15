@@ -3,6 +3,7 @@ package controllers;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
+import java.time.Year;
 import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -12,6 +13,7 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 
 import application.Utils;
+import dao.PeliculaDAO;
 import dao.UbicacionDAO;
 import dao.UsuarioDAO;
 import javafx.collections.FXCollections;
@@ -40,6 +42,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import models.Ubicacion;
+import models.Pelicula;
 
 public class PaginaDescubrirController {
 
@@ -115,7 +118,7 @@ public class PaginaDescubrirController {
         e.printStackTrace();
       }
     });
-    
+
     imgViewAnadePelicula.setOnMouseClicked(event -> {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PaginaAnadir.fxml"));
       PaginaAnadirController controller = new PaginaAnadirController(userGenre, correo);
@@ -132,11 +135,8 @@ public class PaginaDescubrirController {
     });
 
     // rellenar comboboxes
-    
-    cbEstado.getItems().addAll(
-        new String("Visto"),
-        new String("No Visto")
-    );
+
+    cbEstado.getItems().addAll(new String("Visto"), new String("No Visto"));
     cbEstado.setValue("No Visto");
 
     OkHttpClient client = new OkHttpClient();
@@ -165,7 +165,7 @@ public class PaginaDescubrirController {
       years.add(String.valueOf(year));
     }
     cbYear.setItems(years);
-    
+
     List<Ubicacion> ubicaciones = UbicacionDAO.getUbicacionesCorreo(correo);
     for (Ubicacion ubicacion : ubicaciones) {
       cbUbicacion.getItems().add(ubicacion.getNombre());
@@ -223,8 +223,11 @@ public class PaginaDescubrirController {
           .build();
       Response response;
       try {
-        response = client.newCall(request).execute();
-        imprimir(response, client, request);
+        int contador = buscarPeliculas();
+        if (cbEstado.getSelectionModel().getSelectedItem().equals("No visto") && cbUbicacion.getSelectionModel().getSelectedItem().equals("Ninguna")) {
+          response = client.newCall(request).execute();
+          imprimir(contador, response, client, request);
+        }
       } catch (IOException e) {
         e.printStackTrace();
       }
@@ -232,7 +235,7 @@ public class PaginaDescubrirController {
     });
   }
 
-  void imprimir(Response response, OkHttpClient client, Request request) throws IOException {
+  void imprimir(int contador, Response response, OkHttpClient client, Request request) throws IOException {
 
     double saltoX = 175.0;
     double saltoY = 251.0;
@@ -242,7 +245,7 @@ public class PaginaDescubrirController {
 
     for (int i = 0; i < arrayPeliculas.length(); i++) {
 
-      double filaActual = i / imagenesPorFila;
+      double filaActual = (i / imagenesPorFila) + contador;
       JSONObject movieObject = arrayPeliculas.getJSONObject(i);
 
       ImageView imageView = new ImageView();
@@ -327,7 +330,7 @@ public class PaginaDescubrirController {
       stackPane.setOnMouseClicked(event -> {
         FXMLLoader loader =
             new FXMLLoader(getClass().getResource("/views/PaginaInfoPelicula.fxml"));
-        PaginaInfoPeliculaController controller = new PaginaInfoPeliculaController(
+        PaginaInfoPeliculaController controller = new PaginaInfoPeliculaController(false,
             movieObject.getInt("id"), etiquetaGeneroEnviar, etiquetaTitulo, urlEnviarFinal,
             labelEstrellas.getText(), movieObject.getString("overview"), userGenre, correo);
         loader.setController(controller);
@@ -363,6 +366,134 @@ public class PaginaDescubrirController {
 
       peliculas.getChildren().add(stackPane);
     }
+  }
+  
+  int buscarPeliculas() {
+
+    String titulo = txtfBuscarTitulo.getText();
+    String actor = txtfBuscarActor.getText();
+    String genero = cbGeneros.getSelectionModel().getSelectedItem();
+    String ubicacion = cbUbicacion.getSelectionModel().getSelectedItem();
+    String year = cbYear.getSelectionModel().getSelectedItem();
+    Year yearObject = (year != null && !year.isEmpty()) ? Year.parse(year) : null;
+    boolean visto = "Visto".equals(cbEstado.getValue());
+    ObservableList<Pelicula> peliculasEncontradas = FXCollections.observableArrayList(
+            PeliculaDAO.obtenerPeliculasConFiltros(titulo, null, actor, yearObject, genero, ubicacion, visto));
+    double saltoX = 175.0;
+    double saltoY = 251.0;
+    int imagenesPorFila = 3;
+    int contador = 0;
+
+    for (Pelicula pelicula : peliculasEncontradas) {
+
+      double filaActual = contador / imagenesPorFila;
+
+      ImageView imageView = new ImageView();
+      imageView.setFitHeight(248.0);
+      imageView.setFitWidth(165.0);
+      imageView.setPreserveRatio(false);
+      imageView.setPickOnBounds(true);
+      String urlEnviar = "";
+        InputStream imageUrl = getClass().getResourceAsStream(pelicula.getPoster());
+        Image image = new Image(imageUrl);
+        urlEnviar = imageUrl.toString();
+        imageView.setImage(image);
+      String urlEnviarFinal = urlEnviar;
+
+      String releaseDate = pelicula.getYear().toString();
+      Label labelPrincipal = new Label(pelicula.getNombre() + " (" + releaseDate + ")");
+      Font font = Font.font("Arial", FontWeight.BOLD, 20.0);
+      labelPrincipal.setFont(font);
+      labelPrincipal.setTextFill(Color.web("#16242B"));
+      labelPrincipal.setMaxWidth(165.0);
+      labelPrincipal.setWrapText(true);
+      labelPrincipal.setVisible(false);
+      labelPrincipal.setAlignment(Pos.CENTER);
+      labelPrincipal.setTextAlignment(TextAlignment.CENTER);
+
+      String etiquetaGenero = pelicula.getGenero();
+      String etiquetaGeneroEnviar = etiquetaGenero;
+      int horas = pelicula.getMinutos() / 60;
+      int minutosRestantes = pelicula.getMinutos() % 60;
+      if (horas == 0) {
+        etiquetaGenero += "\n" + minutosRestantes + "min";
+      } else if (minutosRestantes == 0) {
+        etiquetaGenero += "\n" + horas + "h";
+      } else {
+        etiquetaGenero += "\n" + horas + "h " + minutosRestantes + "min";
+      }
+
+      Label labelGenero = new Label(etiquetaGenero);
+      Font fontSmall = Font.font("Arial", FontWeight.BOLD, 16.0);
+      labelGenero.setFont(fontSmall);
+      labelGenero.setTextFill(Color.web("#16242B"));
+      labelGenero.setMaxWidth(165.0);
+      labelGenero.setWrapText(true);
+      labelGenero.setVisible(false);
+      labelGenero.setAlignment(Pos.CENTER);
+      labelGenero.setTextAlignment(TextAlignment.CENTER);
+
+      DecimalFormat formato = new DecimalFormat("#.#");
+      String etiquetaEstrellas = formato.format(pelicula.getEstrellas()) + "★";
+      Font fontBig = Font.font("Arial", FontWeight.BOLD, 26.0);
+      Label labelEstrellas = new Label(etiquetaEstrellas);
+      labelEstrellas.setFont(fontBig);
+      labelEstrellas.setTextFill(Color.web("#16242B"));
+      labelEstrellas.setMaxWidth(165.0);
+      labelEstrellas.setWrapText(true);
+      labelEstrellas.setVisible(false);
+      labelEstrellas.setAlignment(Pos.CENTER);
+      labelEstrellas.setTextAlignment(TextAlignment.CENTER);
+
+      StackPane stackPane = new StackPane(imageView, labelPrincipal, labelGenero, labelEstrellas);
+      StackPane.setAlignment(labelGenero, Pos.BOTTOM_CENTER);
+      StackPane.setAlignment(labelPrincipal, Pos.TOP_CENTER);
+      StackPane.setMargin(labelGenero, new Insets(0, 0, 20, 0));
+      StackPane.setMargin(labelPrincipal, new Insets(10, 0, 0, 0));
+      stackPane.setLayoutX(21.0 + (contador % imagenesPorFila) * saltoX);
+      stackPane.setLayoutY(16.0 + filaActual * saltoY);
+
+      stackPane.setOnMouseClicked(event -> {
+        FXMLLoader loader =
+            new FXMLLoader(getClass().getResource("/views/PaginaInfoPelicula.fxml"));
+        PaginaInfoPeliculaController controller = new PaginaInfoPeliculaController(true,
+            pelicula.getIdPelicula(), etiquetaGeneroEnviar, pelicula.getNombre(), urlEnviarFinal,
+            labelEstrellas.getText(), pelicula.getSinopsis(), userGenre, correo);
+        loader.setController(controller);
+        try {
+          Parent root = loader.load();
+          Scene scene = new Scene(root);
+          scene.getStylesheets().add(getClass().getResource("/application.css").toExternalForm());
+          Stage stage = (Stage) stackPane.getScene().getWindow();
+          stage.setScene(scene);
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      });
+
+      stackPane.setOnMouseEntered(event -> {
+        Color colorToOverlay = Color.web("#BCBCBC");
+        ColorInput colorInput = new ColorInput(0, 0, imageView.getBoundsInLocal().getWidth(),
+            imageView.getBoundsInLocal().getHeight(), colorToOverlay);
+        Blend blend = new Blend(BlendMode.SRC_OVER);
+        blend.setTopInput(colorInput);
+        imageView.setEffect(blend);
+        labelPrincipal.setVisible(true);
+        labelGenero.setVisible(true);
+        labelEstrellas.setVisible(true);
+      });
+
+      stackPane.setOnMouseExited(event -> {
+        imageView.setEffect(null);
+        labelPrincipal.setVisible(false);
+        labelGenero.setVisible(false);
+        labelEstrellas.setVisible(false);
+      });
+
+      peliculas.getChildren().add(stackPane);
+      contador++;
+    }
+    return contador % imagenesPorFila;
   }
 
   @FXML

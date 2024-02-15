@@ -15,37 +15,37 @@ public class UsuarioDAO {
     Transaction transaction = null;
 
     try {
-        transaction = session.beginTransaction();
-        Query query = session.createQuery("FROM Usuario WHERE nombre = :usuario OR email = :correo");
-        query.setParameter("usuario", usuario);
-        query.setParameter("correo", correo);
+      transaction = session.beginTransaction();
+      Query query = session.createQuery("FROM Usuario WHERE nombre = :usuario OR email = :correo");
+      query.setParameter("usuario", usuario);
+      query.setParameter("correo", correo);
 
-        List<Usuario> usuariosExistente = query.list();
+      List<Usuario> usuariosExistente = query.list();
 
-        if (usuariosExistente.isEmpty()) {
-            Usuario newUser = new Usuario();
-            newUser.setNombre(usuario);
-            newUser.setContraseña(password);
-            newUser.setEmail(correo);
-            newUser.setGenero(genero);
-            session.save(newUser);
-            transaction.commit();
-        } else {
-          Alert alert = new Alert(AlertType.WARNING);
-          alert.setTitle("Error");
-          alert.setHeaderText(null);
-          alert.setContentText("El correo o el usuario ya está ocupado. Escoge otro diferente.");
-          alert.showAndWait();
-        }
+      if (usuariosExistente.isEmpty()) {
+        Usuario newUser = new Usuario();
+        newUser.setNombre(usuario);
+        newUser.setContraseña(password);
+        newUser.setEmail(correo);
+        newUser.setGenero(genero);
+        session.save(newUser);
+        transaction.commit();
+      } else {
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText("El correo o el usuario ya está ocupado. Escoge otro diferente.");
+        alert.showAndWait();
+      }
     } catch (Exception e) {
-        if (transaction != null) {
-            transaction.rollback();
-        }
-        e.printStackTrace();
+      if (transaction != null) {
+        transaction.rollback();
+      }
+      e.printStackTrace();
     } finally {
-        session.close();
+      session.close();
     }
-}
+  }
 
 
 

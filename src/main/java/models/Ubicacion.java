@@ -11,30 +11,30 @@ public class Ubicacion {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
-    private String correo;
-    private String nombre;
+  private String correo;
+  private String nombre;
 
-    public Ubicacion() {}
+  public Ubicacion() {}
 
-    public Ubicacion(String correo, String nombre) {
-      this.correo = correo;
-      this.nombre = nombre;
-    }
+  public Ubicacion(String correo, String nombre) {
+    this.correo = correo;
+    this.nombre = nombre;
+  }
 
-    public String getCorreo() {
-      return correo;
-    }
+  public String getCorreo() {
+    return correo;
+  }
 
-    public void setCorreo(String correo) {
-      this.correo = correo;
-    }
+  public void setCorreo(String correo) {
+    this.correo = correo;
+  }
 
-    public String getNombre() {
-      return nombre;
-    }
+  public String getNombre() {
+    return nombre;
+  }
 
-    public void setNombre(String nombre) {
-      this.nombre = nombre;
-    }
-  
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
+  }
+
 }

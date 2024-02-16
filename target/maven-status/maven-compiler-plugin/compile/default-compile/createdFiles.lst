@@ -15,3 +15,4 @@ models\Usuario.class
 dao\UbicacionDAO.class
 models\Pelicula.class
 controllers\PaginaPerfilController.class
+application\App.class

@@ -76,21 +76,7 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Pane layoutX="605.0" layoutY="22.0" prefHeight="58.0" prefWidth="171.0" style="-fx-background-color: BCBCBC;">
-                     <children>
-                        <Label layoutX="6.0" layoutY="8.0" prefHeight="43.0" prefWidth="111.0" text="Añadir o Votar" textFill="#16242b">
-                           <font>
-                              <Font name="Arial" size="17.0" />
-                           </font>
-                        </Label>
-                        <ImageView fx:id="imgViewAnadir" fitHeight="49.0" fitWidth="49.0" layoutX="115.0" layoutY="5.0" onMouseClicked="#imgViewAnadir" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../img/favoritos.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
-                  <Label fx:id="labelTitulo" layoutX="43.0" layoutY="37.0" prefHeight="43.0" prefWidth="544.0" text="Película">
+                  <Label fx:id="labelTitulo" layoutX="43.0" layoutY="37.0" prefHeight="43.0" prefWidth="738.0" text="Película">
                      <font>
                         <Font name="Arial" size="38.0" />
                      </font>

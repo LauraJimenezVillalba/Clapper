@@ -1,6 +1,9 @@
 package controllers;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Year;
 import java.util.List;
 import org.json.JSONArray;
@@ -26,8 +29,17 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import models.Pelicula;
 import models.Ubicacion;
@@ -45,6 +57,9 @@ public class PaginaAnadirController {
 
   @FXML
   private ComboBox<String> cbUbicacion;
+  
+  @FXML
+  private ComboBox<Integer> cbMin;
 
   @FXML
   private CheckBox chkbVisto;
@@ -78,10 +93,40 @@ public class PaginaAnadirController {
 
   @FXML
   private Button btnGuardar;
+  
+  @FXML
+  private Pane subirImagen;
+  
+  @FXML
+  private ImageView poster;
+  
+  String posterURL = "/img/blanco.jpg";
 
   public PaginaAnadirController(int userGenre, String correo) {
     this.userGenre = userGenre;
     this.correo = correo;
+  }
+  
+  @FXML
+  void subirImagen(MouseEvent event) {
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Selecciona una imagen");
+    ExtensionFilter imageFilter = new ExtensionFilter("Archivos de imagen", "*.png", "*.jpg", "*.jpeg", "*.gif");
+    fileChooser.getExtensionFilters().add(imageFilter);
+    File file = fileChooser.showOpenDialog(null);
+
+    if (file != null) {
+      try {
+          URL fileUrl = file.toURI().toURL();
+          Image image = new Image(fileUrl.toString());
+          poster.setImage(image);
+          posterURL = fileUrl.toString();
+      } catch (MalformedURLException e) {
+          e.printStackTrace();
+      }
+  }
+
+
   }
 
   public void initialize() throws IOException {
@@ -165,24 +210,30 @@ public class PaginaAnadirController {
     }
     cbAno.setItems(years);
     cbAno.setValue(Integer.toString(currentYear));
+    
+    ObservableList<Integer> minutos = FXCollections.observableArrayList();
+    for (int i = 1; i <= 999; i++) {
+      minutos.add(i);
+    }
+    cbMin.setItems(minutos);
+    cbMin.setValue(1);
 
   }
 
   @FXML
   void clickGuardar(ActionEvent event) {
     UbicacionDAO.newUbi(cbUbicacion.getSelectionModel().getSelectedItem(), correo);
+    PeliculaDAO.nuevaPelicula(
+        new Pelicula(txtfTitulo.getText(), Year.parse(cbAno.getSelectionModel().getSelectedItem()),
+            cbMin.getValue(), sldValoracion.getValue(), sinopsis.getText(), posterURL,
+            chkbVisto.isSelected(), cbGenero.getSelectionModel().getSelectedItem(),
+            cbUbicacion.getSelectionModel().getSelectedItem(), txtfActor.getText(),
+            txtfDirector.getText()));
     cbUbicacion.getItems().clear();
     List<Ubicacion> ubicaciones = UbicacionDAO.getUbicacionesCorreo(correo);
     for (Ubicacion ubicacion : ubicaciones) {
       cbUbicacion.getItems().add(ubicacion.getNombre());
     }
-    cbUbicacion.setValue("Ninguna");
-    PeliculaDAO.nuevaPelicula(
-        new Pelicula(txtfTitulo.getText(), Year.parse(cbAno.getSelectionModel().getSelectedItem()),
-            0, sldValoracion.getValue(), sinopsis.getText(), "/img/blanco.jpg",
-            chkbVisto.isSelected(), cbGenero.getSelectionModel().getSelectedItem(),
-            cbUbicacion.getSelectionModel().getSelectedItem(), txtfActor.getText(),
-            txtfDirector.getText()));
     Alert alert = new Alert(AlertType.INFORMATION);
     alert.setTitle("Pelicula guardada");
     alert.setHeaderText(null);
@@ -195,9 +246,12 @@ public class PaginaAnadirController {
     chkbVisto.setSelected(false);
     cbAno.setValue("2024");
     cbUbicacion.setValue("Ninguna");
-    cbUbicacion.setValue("Acción");
+    cbGenero.setValue("Acción");
     sldValoracion.setValue(0);
     sinopsis.clear();
+    Image image = new Image("/img/blanco.jpg");
+    poster.setImage(image);
+    posterURL = "/img/blanco.jpg";
   }
 
   @FXML
@@ -207,6 +261,11 @@ public class PaginaAnadirController {
 
   @FXML
   void cbGenero(ActionEvent event) {
+
+  }
+  
+  @FXML
+  void cbMin(ActionEvent event) {
 
   }
 

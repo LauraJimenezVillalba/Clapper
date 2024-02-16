@@ -14,7 +14,7 @@ import models.Usuario;
 
 public class PeliculaDAO {
 
-  public static List<Pelicula> obtenerPeliculasConFiltros(String titulo, String director,
+  public static List<Pelicula> obtenerPeliculasConFiltros(String titulo,
       String actor, Year year, String genero, String ubicacion, boolean visto) {
     Session session = HibernateUtil.getSessionFactory().openSession();
 
@@ -22,9 +22,6 @@ public class PeliculaDAO {
       Criteria criteria = session.createCriteria(Pelicula.class);
       if (titulo != null && !titulo.isEmpty()) {
         criteria.add(Restrictions.ilike("nombre", "%" + titulo + "%"));
-      }
-      if (director != null && !director.isEmpty()) {
-        criteria.add(Restrictions.ilike("directores", "%" + director + "%"));
       }
       if (actor != null && !actor.isEmpty()) {
         criteria.add(Restrictions.ilike("actores", "%" + actor + "%"));

@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import org.json.JSONArray;
@@ -52,9 +53,6 @@ public class PaginaInfoPeliculaController {
 
   @FXML
   private ImageView imgViewAnadePelicula;
-
-  @FXML
-  private ImageView imgViewAnadir;
 
   @FXML
   private ImageView imgViewBuscaPelicula;
@@ -142,22 +140,31 @@ public class PaginaInfoPeliculaController {
       
     } else {
       
-      Pelicula pelicula = PeliculaDAO.peliculaByTitulo(tituloCompuesto);
+      String ano = "";
+      String regex = "\\s*(.*?)\\s*\\((\\d{4})\\)\\s*";
+      java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(regex);
+      java.util.regex.Matcher matcher = pattern.matcher(tituloCompuesto);
+      if (matcher.matches()) {
+        labelTitulo.setText(matcher.group(1).trim());
+        ano = matcher.group(2);
+      }
       
-      InputStream imageUrl = getClass().getResourceAsStream(pelicula.getPoster());
+      Pelicula pelicula = PeliculaDAO.peliculaByTitulo(labelTitulo.getText());
+      
+      InputStream imageUrl = null;
+      if (pelicula.getPoster().contains("file")) {
+        String filePath = pelicula.getPoster().substring(5);
+        imageUrl = new FileInputStream(filePath);
+      } else {
+        imageUrl = getClass().getResourceAsStream(pelicula.getPoster());
+      }
       Image image = new Image(imageUrl);
       imgViewCartelPelicula.setImage(image);
       
       textoPrincipal += pelicula.getActores();
       textoPrincipal += "\nDirector(es): " + pelicula.getDirectores();
       textoPrincipal += "\nGénero: " + pelicula.getGenero();
-      String regex = "\\s*(.*?)\\s*\\((\\d{4})\\)\\s*";
-      java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(regex);
-      java.util.regex.Matcher matcher = pattern.matcher(tituloCompuesto);
-      if (matcher.matches()) {
-        labelTitulo.setText(matcher.group(1).trim());
-        textoPrincipal += "\nAño: " + matcher.group(2);
-      }
+      textoPrincipal += "\nAño: " + ano;
 
       textoPrincipal += "\n" + pelicula.getSinopsis();
       PseudoClass centered = PseudoClass.getPseudoClass("centered");

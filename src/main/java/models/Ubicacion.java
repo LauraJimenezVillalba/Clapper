@@ -9,7 +9,6 @@ import javax.persistence.Id;
 public class Ubicacion {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
   private String correo;
   private String nombre;

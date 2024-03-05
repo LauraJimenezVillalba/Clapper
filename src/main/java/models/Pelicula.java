@@ -12,7 +12,6 @@ import javax.persistence.Id;
 public class Pelicula {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int idPelicula;
   private String nombre;
   private Year year;

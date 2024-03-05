@@ -99,12 +99,7 @@ public class RegisterController {
         ;
         UsuarioDAO.newUser(txtUsuario.getText(), txtCorreo.getText(), txtPassword.getText(),
             Utils.getIDByGenre(cbGenero.getSelectionModel().getSelectedItem()));
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Usuario registrado");
-        alert.setHeaderText(null);
-        alert.setContentText("Tu nuevo usuario ha sido registrado correctamente.");
         UbicacionDAO.newUbi("Ninguna", txtCorreo.getText());
-        alert.showAndWait();
         try {
           handleBtnVolver();
         } catch (IOException e) {

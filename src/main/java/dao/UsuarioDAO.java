@@ -30,6 +30,11 @@ public class UsuarioDAO {
         newUser.setGenero(genero);
         session.save(newUser);
         transaction.commit();
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Usuario registrado");
+        alert.setHeaderText(null);
+        alert.setContentText("Tu nuevo usuario ha sido registrado correctamente.");
+        alert.showAndWait();
       } else {
         Alert alert = new Alert(AlertType.WARNING);
         alert.setTitle("Error");
